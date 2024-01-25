@@ -15,6 +15,7 @@ public class HistoryServlet extends HttpServlet {
         //1.Достать историю
         //2.Положить в память
         //3.Отдать страницу с историей
-
+        req.setAttribute("history", Calculator.history);
+        getServletContext().getRequestDispatcher("/history-page.jsp").forward(req, resp);
     }
 }

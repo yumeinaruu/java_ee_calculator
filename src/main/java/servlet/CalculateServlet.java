@@ -13,8 +13,11 @@ public class CalculateServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String equation = req.getParameter("equation");
+        if(equation.isBlank()){
+            equation = "No input";
+        }
         String result = Calculator.calculate(equation);
-        Calculator.history.put(equation, result.replace("Your result = ", ""));
+        Calculator.history.add(equation + "|" + result.replace("Your result = ", ""));
         req.setAttribute("result", result);
         getServletContext().getRequestDispatcher("/result-page.jsp").forward(req, resp);
     }
